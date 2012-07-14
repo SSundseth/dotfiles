@@ -1,7 +1,6 @@
 alias .a="$EDITOR ~/.aliases && source ~/.aliases"
 alias .v="$EDITOR ~/.vimrc"
 alias .z="$EDITOR ~/.zshrc"
-alias .g="$EDITOR ~/.github"
 
 alias ll="ls -la"
 alias up="cd .."
