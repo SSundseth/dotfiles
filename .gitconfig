@@ -1,0 +1,14 @@
+[user]
+	name = Stefan Sundseth
+	email = stefan.sundseth@viget.com
+[credential]
+  helper = osxkeychain
+[color]
+  diff=always
+[core]
+  editor = mvim -f
+  excludesfile = /Users/viget/.gitignore_global
+[rerere]
+  enabled = 1
+[alias]
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%Creset' --abbrev-commit
