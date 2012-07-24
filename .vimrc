@@ -59,6 +59,7 @@ color candycode
 let mapleader = ","
 map <leader>n :NERDTreeToggle<CR>
 map <leader>e :e <C-R>=expand("%:p:h") . '/'<CR>
+map <leader>b :FufBuffer<CR>
 nmap <tab> <C-w>w
 nmap <C-tab> <C-w>h
 nnoremap <F3> :set hlsearch!<CR>
