@@ -23,8 +23,8 @@ setopt auto_cd
 setopt prompt_subst
 
 # Bindings
-bindkey ^A beginnning-of-line
-bindkey ^E end-of-line
+bindkey "^A" beginning-of-line
+bindkey "^E" end-of-line
 
 # Path
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin

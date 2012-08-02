@@ -1,81 +1,80 @@
-" Use filetype plugins
-call pathogen#infect()
-syntax on
-filetype plugin on
-filetype indent on
+"****************************************
+" Pathogen ftw!
+"****************************************
+call pathogen#infect()                  " load plugins
+syntax on                               " highlight based on syntax
+filetype plugin on                      " use plugins
+filetype indent on                      " indent based on filetype
 
+
+"****************************************
 " Window settings
-set number!
-set ruler
-set columns=84
-set wrap
-set cmdheight=2
+"****************************************
+set number!                             " show line numbers
+set wrap                                " wrap text
+set whichwrap+=<,>,h,l                  " move to next line in command-mode
+set cmdheight=2                         " command bar two lines high
+set laststatus=2                        " status bar more visible
+set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
+set showmatch                           " highlight matching parentheses
+set hlsearch                            " highlight search hits
+set incsearch                           " move the cursor to first search hit
+set backspace=eol,start,indent          " backspace detects indentation
+color candycode                         " 1337 h4x
+set hidden                              " hide abandoned buffers
 
-" Highlight matching parentheses
-set showmatch
 
-" Search Settings
-set autoindent
-set smartindent
+"****************************************
+" Tab and Indent Settings
+"****************************************
+set autoindent                          " copy indent from previous line
+set smartindent                         " indent based on filetype
+set smarttab                            " number of tabs equals number of indents
+set expandtab                           " tabs are spaces
+set shiftwidth=2                        " indent two spaces
+set tabstop=2                           " tabs are worth two spaces
 
-" No error sound
-set visualbell
 
-" Automatically read a file that is changed outside of Vim
-set autoread
+"****************************************
+" Miscellaneous settings
+"****************************************
+set visualbell                          " no error sounds
+set autoread                            " read a file changed outside of vim
+set viminfo='10,\"100,:20,%,n~/.viminfo
 
-" Hide abandoned buffers
-set hidden
 
-" Sensible backspace
-set backspace=eol,start,indent
+"****************************************
+" Keep tmp files in a safe place
+"****************************************
+set backupdir=~/.vim-tmp,~/.tmp,/var/tmp,/tmp
+set directory=~/.vim-tmp,~/.tmp,/var/tmp,/tmp
 
-" Move to next line
-set whichwrap+=<,>,h,l
 
-" Search settings
-set hlsearch
-set incsearch
+"****************************************
+" GUI preferences
+"****************************************
+if has("gui_running")
+  set guifont=Monaco:h14                " better font, better size
+  set lines=100 columns=300             " fill the screen
+  set guioptions-=T                     " no toolbar
+endif
 
-" Tab settings
-set smarttab
-set expandtab
-set shiftwidth=2
-set tabstop=2
 
-" Place cursor at last position
-autocmd BufReadPost *
-  \ if line("'\"") > 0 && line("'\"") <= line("$") |
-  \ exe "normal! g~\"" |
-  \ endif
-
-" Status line
-set laststatus=2
-
-" 1337 h4X
-color candycode
-
-" Mappings
+"****************************************
+" Useful mappings
+"****************************************
 let mapleader = ","
 map <leader>n :NERDTreeToggle<CR>
 map <leader>e :e <C-R>=expand("%:p:h") . '/'<CR>
 map <leader>b :FufBuffer<CR>
 nmap <tab> <C-w>w
 nmap <C-tab> <C-w>h
-nnoremap <F3> :set hlsearch!<CR>
+nnoremap <C-h> :set hlsearch!<CR>
 
 
-" Keep tmp files in a safe place
-set backupdir=~/.vim-tmp,~/.tmp,/var/tmp,/tmp
-set directory=~/.vim-tmp,~/.tmp,/var/tmp,/tmp
-
-"GUI prefs
-if has("gui_running")
-  set guifont=Monaco:h14
-  set lines=999 columns=84
-endif
-
-" Map commands that might accidentally be capitalized
+"****************************************
+" Map commands that might be capitalized
+"****************************************
 command! -bang E e<bang>
 command! -bang Q q<bang>
 command! -bang W w<bang>
@@ -86,13 +85,30 @@ command! -bang Wa wa<bang>
 command! -bang WQ wq<bang>
 command! -bang Wq wq<bang>
 
+
+"****************************************
+" Autocommands
+"****************************************
+au BufWritePre * call TrimWhiteSpace()  " remove whitespace before saving
+augroup resCur                          " return cursor to previous position
+  autocmd!
+  autocmd BufWinEnter * call ResCur()
+augroup ENDif
+
+
+"****************************************
 " Functions
-function TrimWhiteSpace()
-  let save_cursor = getpos(".")
-  :silent! %s#\($\n\s*\)\+\%$##
+"****************************************
+function TrimWhiteSpace()               " removes whitespace from the end of
+  let save_cursor = getpos(".")         " every line and all blank lines at the
+  :silent! %s#\($\n\s*\)\+\%$##         " end of the file
   :silent! %s/\s\+$// | w
   call setpos(".", save_cursor)
 endfunction
 
-" Remove whitespace before saving
-au BufWritePre * call TrimWhiteSpace()
+function! ResCur()                      " save the cursor's position
+  if line("'\"") <= line("$")
+    normal! g`"
+    return 1
+  endif
+endfunction

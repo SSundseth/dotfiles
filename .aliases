@@ -1,9 +1,9 @@
+# Environment Variables
 alias .a="$EDITOR ~/.aliases && source ~/.aliases"
 alias .v="$EDITOR ~/.vimrc"
 alias .z="$EDITOR ~/.zshrc"
 
-alias ll="ls -la"
-alias up="cd .."
+# List ALL THE THINGS
 alias ll='ls -alF'
 alias la='ls -A'
 
