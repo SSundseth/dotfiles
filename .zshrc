@@ -5,12 +5,19 @@ ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="cloud"
 
 # Load Plugins
-plugins=(git brew rvm)
+plugins=(git brew rvm yum)
 
 source $ZSH/oh-my-zsh.sh
 
 # Use Vim as default editor
-export EDITOR="mvim"
+case 'uname' in
+  Darwin)
+    export EDITOR="mvim"
+    ;;
+  Linux)
+    export EDITOR="gvim"
+    ;;
+esac
 
 # Completion
 autoload -U compinit
