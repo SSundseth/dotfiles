@@ -10,14 +10,7 @@ plugins=(git brew rvm yum)
 source $ZSH/oh-my-zsh.sh
 
 # Use Vim as default editor
-case 'uname' in
-  Darwin)
-    export EDITOR="mvim"
-    ;;
-  Linux)
-    export EDITOR="gvim"
-    ;;
-esac
+export EDITOR="mvim"
 
 # Completion
 autoload -U compinit
