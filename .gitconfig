@@ -1,12 +1,12 @@
 [user]
 	name = Stefan Sundseth
-	email = stefan.sundseth@viget.com
-[credential]
-  helper = osxkeychain
+  email = stefan.sundseth@viget.com
+[credential.helper]
+  timeout = 900
 [color]
   diff=always
 [core]
-  editor = mvim -f
+  editor = gvim
   excludesfile = /Users/viget/.gitignore_global
 [rerere]
   enabled = 1

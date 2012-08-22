@@ -53,9 +53,10 @@ set directory=~/.vim-tmp,~/.tmp,/var/tmp,/tmp
 " GUI preferences
 "****************************************
 if has("gui_running")
-  set guifont=Monaco:h14                " better font, better size
+  set guifont=Droid\ Sans\ Mono\ 12     " better font, better size
   set lines=100 columns=300             " fill the screen
   set guioptions-=T                     " no toolbar
+  set guioptions-=m                     " no menubar
 endif
 
 
@@ -88,6 +89,9 @@ command! -bang Wq wq<bang>
 "****************************************
 " Autocommands
 "****************************************
+au BufRead, BufNewFile *.prolog set syntax=prolog
+au BufRead, BufNewFile *.mod set syntax=lambdaprolog
+
 au BufWritePre * call TrimWhiteSpace()  " remove whitespace before saving
 augroup resCur                          " return cursor to previous position
   autocmd!

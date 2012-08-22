@@ -10,7 +10,11 @@ plugins=(git brew rvm yum)
 source $ZSH/oh-my-zsh.sh
 
 # Use Vim as default editor
+<<<<<<< HEAD
 export EDITOR="mvim"
+=======
+export EDITOR="gvim"
+>>>>>>> prolog support in vimrc
 
 # Completion
 autoload -U compinit
@@ -27,7 +31,7 @@ bindkey "^A" beginning-of-line
 bindkey "^E" end-of-line
 
 # Path
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin
+export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/home/stefan/bin
 
 # Aliases
 if [ -e "$HOME/.aliases" ]; then
