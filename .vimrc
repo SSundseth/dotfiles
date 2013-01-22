@@ -17,6 +17,7 @@ set cmdheight=2                         " command bar two lines high
 set laststatus=2                        " status bar more visible
 set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
 set showmatch                           " highlight matching parentheses
+set hlsearch                            " highlight search hits
 set incsearch                           " move the cursor to first search hit
 set backspace=eol,start,indent          " backspace detects indentation
 color candycode                         " 1337 h4x
@@ -67,6 +68,7 @@ let mapleader = ","
 map <leader>n :NERDTreeToggle<CR>
 map <leader>e :e <C-R>=expand("%:p:h") . '/'<CR>
 map <leader>b :FufBuffer<CR>
+map <leader>s :set spell!<CR>
 nmap <tab> <C-w>w
 nmap <C-tab> <C-w>h
 nnoremap <C-h> :set hlsearch!<CR>
@@ -89,8 +91,11 @@ command! -bang Wq wq<bang>
 "****************************************
 " Autocommands
 "****************************************
-au BufRead, BufNewFile *.prolog set syntax=prolog
-au BufRead, BufNewFile *.mod set syntax=lambdaprolog
+au BufRead,BufNewFile *.prolog set syntax=prolog
+au BufRead,BufNewFile *.mod set syntax=lprolog
+au BufRead,BufNewFile *.md set syntax=markdown
+au BufRead,BufNewFile *.tex set syntax=tex
+
 
 au BufWritePre * call TrimWhiteSpace()  " remove whitespace before saving
 augroup resCur                          " return cursor to previous position
